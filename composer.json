@@ -1,0 +1,18 @@
+{
+  "name": "student/php-mvc-final-exam",
+  "description": "my php entry",
+  "type": "project",
+  "require": {
+    "php": "^8.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Core\\": "core/",
+      "App\\": "app/"
+    }
+  },
+  "scripts": {
+    "server": "php -S 127.0.0.1:8000 -t public",
+    "check": "find app core config public routes -name '*.php' -print0 | xargs -0 -n1 php -l"
+  }
+}
