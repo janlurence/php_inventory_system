@@ -14,75 +14,71 @@ $pageTitle = isset($title) ? $e($title) . ' | PHP MVC Inventory' : 'PHP MVC Inve
     <style>
         :root {
             color-scheme: light;
-            --ink: #172033;
-            --muted: #657084;
-            --line: #d9dee8;
-            --panel: #ffffff;
-            --page: #f5f7fb;
-            --accent: #0f766e;
-            --accent-dark: #115e59;
-            --danger: #b42318;
+            --text: #222;
+            --muted: #555;
+            --border: #bbb;
+            --page: #f2f6fa;
+            --primary: #2f6f9f;
+            --primary-dark: #255a82;
+            --danger: #b00020;
         }
 
         * { box-sizing: border-box; }
         body {
             margin: 0;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
             background: var(--page);
         }
 
         header {
-            background: #111827;
+            background: var(--primary);
             color: #fff;
-            border-bottom: 4px solid var(--accent);
+            border-bottom: 2px solid var(--primary-dark);
         }
 
         .bar, main {
-            width: min(1120px, calc(100% - 32px));
+            width: min(1050px, calc(100% - 24px));
             margin: 0 auto;
         }
 
         .bar {
-            min-height: 72px;
+            min-height: 58px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 12px;
         }
 
         .brand {
-            font-size: 1.1rem;
-            font-weight: 800;
-            letter-spacing: 0;
+            font-size: 1.05rem;
+            font-weight: bold;
         }
 
         nav a {
-            color: #d1fae5;
+            color: #fff;
             text-decoration: none;
-            font-weight: 700;
-            margin-left: 18px;
+            font-weight: bold;
+            margin-left: 14px;
         }
 
-        main { padding: 34px 0 56px; }
+        main { padding: 24px 0 40px; }
 
         .toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 18px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
-        h1 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.5rem); }
-        p { color: var(--muted); line-height: 1.6; }
+        h1 { margin: 0; font-size: 1.8rem; }
+        p { color: var(--muted); line-height: 1.4; }
 
         .panel {
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-radius: 8px;
+            background: #fff;
+            border: 1px solid var(--border);
             overflow: hidden;
-            box-shadow: 0 12px 28px rgb(20 27 45 / 8%);
         }
 
         table {
@@ -91,18 +87,15 @@ $pageTitle = isset($title) ? $e($title) . ' | PHP MVC Inventory' : 'PHP MVC Inve
         }
 
         th, td {
-            padding: 14px 16px;
+            padding: 10px 12px;
             text-align: left;
-            border-bottom: 1px solid var(--line);
+            border-bottom: 1px solid var(--border);
             vertical-align: middle;
         }
 
         th {
-            font-size: .78rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: .08em;
-            background: #f9fafb;
+            color: #fff;
+            background: var(--primary);
         }
 
         tr:last-child td { border-bottom: 0; }
@@ -110,54 +103,52 @@ $pageTitle = isset($title) ? $e($title) . ' | PHP MVC Inventory' : 'PHP MVC Inve
         .actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
         }
 
         .button, button {
             appearance: none;
-            border: 0;
-            border-radius: 6px;
-            background: var(--accent);
+            border: 1px solid var(--primary-dark);
+            background: var(--primary);
             color: #fff;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 38px;
-            padding: 0 14px;
+            min-height: 34px;
+            padding: 0 12px;
             font: inherit;
-            font-weight: 800;
+            font-weight: bold;
             text-decoration: none;
             white-space: nowrap;
         }
 
-        .button:hover, button:hover { background: var(--accent-dark); }
-        .button.secondary { background: #374151; }
-        .button.secondary:hover { background: #1f2937; }
+        .button:hover, button:hover { background: var(--primary-dark); }
+        .button.secondary { background: #666; border-color: #444; }
+        .button.secondary:hover { background: #444; }
         .button.danger { background: var(--danger); }
-        button.danger { background: var(--danger); }
+        button.danger { background: var(--danger); border-color: #8a0018; }
 
         form.inline { display: inline; }
 
         .form {
-            padding: 22px;
+            padding: 16px;
             display: grid;
-            gap: 18px;
+            gap: 14px;
         }
 
         label {
             display: grid;
-            gap: 7px;
-            font-weight: 800;
+            gap: 5px;
+            font-weight: bold;
         }
 
         input, select {
             width: 100%;
-            min-height: 42px;
-            border: 1px solid #c8d0dc;
-            border-radius: 6px;
-            padding: 9px 11px;
+            min-height: 36px;
+            border: 1px solid var(--border);
+            padding: 7px 9px;
             font: inherit;
             background: #fff;
         }
@@ -165,68 +156,64 @@ $pageTitle = isset($title) ? $e($title) . ' | PHP MVC Inventory' : 'PHP MVC Inve
         .grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
+            gap: 12px;
         }
 
         .error {
             color: var(--danger);
-            font-weight: 700;
+            font-weight: bold;
             font-size: .9rem;
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
-            border-radius: 999px;
-            min-height: 28px;
-            padding: 0 10px;
+            min-height: 24px;
+            padding: 0 8px;
             font-size: .82rem;
-            font-weight: 800;
-            background: #e0f2fe;
-            color: #075985;
+            font-weight: bold;
+            background: #d9edf7;
+            color: #245269;
+            border: 1px solid #9acfea;
         }
 
         .empty {
-            padding: 34px;
+            padding: 24px;
             text-align: center;
         }
 
         .details {
-            padding: 24px;
+            padding: 16px;
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
+            gap: 12px;
         }
 
         .metric {
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 16px;
-            background: #fbfdff;
+            border: 1px solid var(--border);
+            padding: 12px;
+            background: #f9f9f9;
         }
 
         .metric span {
             display: block;
             color: var(--muted);
-            font-size: .78rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .08em;
+            font-size: .85rem;
+            font-weight: bold;
             margin-bottom: 6px;
         }
 
         .warning {
-            padding: 22px;
+            padding: 16px;
             display: grid;
-            gap: 18px;
+            gap: 14px;
         }
 
         .warning-box {
-            border: 1px solid #fecaca;
-            border-radius: 8px;
-            background: #fff7f7;
-            color: #7f1d1d;
-            padding: 16px;
+            border: 1px solid #d88;
+            background: #ffecec;
+            color: #800;
+            padding: 12px;
         }
 
         @media (max-width: 760px) {
@@ -236,16 +223,14 @@ $pageTitle = isset($title) ? $e($title) . ' | PHP MVC Inventory' : 'PHP MVC Inve
             table, thead, tbody, th, td, tr { display: block; }
             thead { display: none; }
             td { border-bottom: 0; padding: 9px 14px; }
-            tr { border-bottom: 1px solid var(--line); padding: 10px 0; }
+            tr { border-bottom: 1px solid var(--border); padding: 10px 0; }
             tr:last-child { border-bottom: 0; }
             td::before {
                 content: attr(data-label);
                 display: block;
                 color: var(--muted);
-                font-size: .76rem;
-                font-weight: 800;
-                text-transform: uppercase;
-                letter-spacing: .08em;
+                font-size: .8rem;
+                font-weight: bold;
                 margin-bottom: 3px;
             }
         }
