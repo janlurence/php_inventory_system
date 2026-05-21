@@ -41,6 +41,24 @@ final readonly class ProductController
         ]));
     }
 
+    public function xssDemo(): Response
+    {
+        return Response::html($this->view->render('products.xss_demo', [
+            'title' => 'XSS Demo',
+            'raw' => '',
+            'sanitized' => '',
+        ]));
+    }
+
+    public function checkXss(Request $request): Response
+    {
+        return Response::html($this->view->render('products.xss_demo', [
+            'title' => 'XSS Demo',
+            'raw' => (string) ($request->rawBody['xss_sample'] ?? ''),
+            'sanitized' => (string) ($request->body['xss_sample'] ?? ''),
+        ]));
+    }
+
     public function store(Request $request): Response
     {
         $validated = $this->validator->validate($request);

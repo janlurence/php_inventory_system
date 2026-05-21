@@ -243,6 +243,7 @@ $pageTitle = isset($title) ? $e($title) . ' | PHP MVC Inventory' : 'PHP MVC Inve
             <nav>
                 <a href="/products">Products</a>
                 <a href="/products/create">Add Product</a>
+                <a href="/xss-demo">XSS Demo</a>
             </nav>
         </div>
     </header>

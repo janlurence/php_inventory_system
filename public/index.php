@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Repositories\PdoProductRepository;
 use App\Repositories\ProductRepositoryInterface;
+use App\Middleware\XssSanitizingMiddleware;
 use Core\Application;
 use Core\Container\Container;
 use Core\Contracts\DatabaseDriver;
@@ -37,6 +38,13 @@ $container->bind(ProductRepositoryInterface::class, PdoProductRepository::class)
 $registerRoutes = require dirname(__DIR__) . '/routes/web.php';
 $registerRoutes($router);
 
-(new Application(container: $container, router: $router))
-    ->handle(Request::capture())
+$application = new Application(container: $container, router: $router);
+
+
+$request = Request::capture();
+//ari ra nako gi add ang paras middleware
+$middleware = new XssSanitizingMiddleware();
+
+$middleware
+    ->handle($request, static fn (Request $request): \Core\Http\Response => $application->handle($request))
     ->send();
