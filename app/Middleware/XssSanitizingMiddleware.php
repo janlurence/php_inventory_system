@@ -17,8 +17,6 @@ final readonly class XssSanitizingMiddleware implements Middleware
             query: $this->sanitizeArray($request->query),
             body: $this->sanitizeArray($request->body),
             server: $request->server,
-            rawQuery: $request->rawQuery,
-            rawBody: $request->rawBody,
         );
 
         return $next($sanitizedRequest);
